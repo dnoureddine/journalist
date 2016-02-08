@@ -1,0 +1,45 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+<!-- container!!!! -->
+<div class="content-wrapper" style="min-height: 1096px;">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Trash
+            <small> here you can restaure you objects</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="#">Trash</a></li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+        <div oncanplay="row">
+
+            <!-- small box -->
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-aqua">
+                    <div class="inner">
+                        <h3>{{ trashedObjects.project }}</h3>
+                        <p>Projects</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-fw fa-trash-o"></i>
+                    </div>
+                    <a href="{{ path('projects') }}" class="small-box-footer">Restaure Projects<i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+{% endblock %}
+
+{% block javascripts %}
+{% endblock %}
