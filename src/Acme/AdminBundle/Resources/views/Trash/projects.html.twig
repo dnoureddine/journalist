@@ -11,13 +11,13 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Projects
-                <small>it all starts here</small>
+                {{ 'Restaure Projects' | trans }}
+                <small>{{ 'here you can restaure projects' | trans }}</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="#">Examples</a></li>
-                <li class="active">Blank page</li>
+                <li><a href="#">Trash</a></li>
+                <li class="active">Projects</li>
             </ol>
         </section>
 
@@ -29,12 +29,6 @@
 
                     <div class="box">
                         <div class="box-header">
-                            <div class="row">
-                                <div class="col-xs-4 col-xs-push-10">
-                                    <!-- Trigger the modal with a button -->
-                                    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">New Project</button>
-                                </div>
-                            </div>
                             <h3 class="box-title"></h3>
                         </div><!-- /.box-header -->
                         <div class="box-body">
@@ -96,7 +90,7 @@
         /* showing Grid Project Datagrid */
         function showDataGridProject() {
             $('#projects').DataTable({
-                "ajax": "{{ path('ajaxProjects') }}",
+                "ajax": "{{ path('ajaxtrashedProjects') }}",
                 "columns": [
                     {"data": "title"},
                     {"data": "date"},

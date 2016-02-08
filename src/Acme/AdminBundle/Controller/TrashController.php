@@ -3,11 +3,11 @@
 namespace Acme\AdminBundle\Controller;
 
 use Acme\AdminBundle\Model\Encryption;
-use Acme\AdminBundle\Model\ProjectModel;
 use Acme\AdminBundle\Model\TrashModel;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class TrashController extends Controller
 {
@@ -24,22 +24,23 @@ class TrashController extends Controller
         return $this->render('AdminBundle:Trash:trash.html.twig', array("trashedObjects"=>$trashedObjects));
     }
 
+
     /**
-     * @Route("/{_locale}/trash/projects",name="projects")
+     * @Route("/{_locale}/trash/trashedprojects",name="trashedprojects")
      */
-    public function ProjectsAction()
+    public function trashedprojectsAction()
     {
         return $this->render('AdminBundle:Trash:projects.html.twig');
     }
 
     /**
-     * @Route("/{_locale}/trash/ajaxProjects",name="ajaxProjects")
+     * @Route("/{_locale}/trash/ajaxtrashedProjects",name="ajaxtrashedProjects")
      */
-    public function ajaxProjectsAction(Request $request)
+    public function ajaxtrashedProjectsAction(Request $request)
     {
         $encryption = new Encryption();
-        $model=new ProjectModel($this->getDoctrine()->getEntityManager());
-        $projects=$model->listProjects(1,0,100);
+        $model=new TrashModel($this->getDoctrine()->getEntityManager());
+        $projects=$model->listTrashedProjects(1,0,100);
 
         $output = array(
             'data' => array()
