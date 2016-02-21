@@ -12,6 +12,7 @@
                 <!-- Ionicons -->
                 <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
                 <!-- Theme style -->
+                <link rel="stylesheet" href="{{ asset('dist/css/app.css')}}">
                 <link rel="stylesheet" href="{{ asset('dist/css/AdminLTE.min.css')}}">
                 <!-- AdminLTE Skins. Choose a skin from the css/skins
                      folder instead of downloading all of them to reduce the load. -->
@@ -327,15 +328,22 @@
                         </li>
 
                         <li class="treeview">
+                            <a href="/web/app_dev.php/en/profile/">
+                                <i class="fa fa-user"></i> <span> {{ 'Profile' | trans }}</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                        </li>
+
+                        <li class="treeview">
                             <a href="/web/app_dev.php/en/project/projects">
-                                <i class="fa fa-edit"></i> <span>Projects</span>
+                                <i class="fa fa-edit"></i> <span>{{ 'Projects' | trans }}</span>
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                         </li>
 
                         <li class="treeview">
                             <a href="/web/app_dev.php/en/trash">
-                                <i class="fa fa-fw fa-trash-o"></i> <span>Trash</span>
+                                <i class="fa fa-fw fa-trash-o"></i> <span>{{ 'Trash' | trans }}</span>
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                         </li>

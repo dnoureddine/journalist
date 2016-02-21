@@ -1,0 +1,586 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+
+    <!-- container!!!! -->
+    <div class="content-wrapper" style="min-height: 1096px;">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                {{ 'Porfile' | trans }}
+                <small>{{ 'here you can edit you profile' | trans }}</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li><a href="#">Profile</a></li>
+            </ol>
+
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <!-- box diplome form -->
+            <div id="boxdiplomes" style="display:none;">
+                <div class="boxdiplomes">
+                    <div class="col-xs-12">
+                    <div class="box box-info">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">{{ 'Diplome' | trans}}</h3>
+                            <div class="box-tools pull-right">
+                                <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse"><i class="fa fa-minus"></i></button>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <label for="diplometitre">{{ 'Titre : ' | trans }}</label>
+                                </div>
+                                <div class="col-xs-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="diplometitre" placeholder="Diplome title">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <label for="institut">{{ 'Institut : ' | trans }}</label>
+                                </div>
+                                <div class="col-xs-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="institut" placeholder="Institut">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <label for="diplomedate">{{ 'Date : ' | trans }}</label>
+                                </div>
+                                <div class="col-xs-6">
+                                    <div class="form-group">
+                                        <input type="date" class="form-control" id="diplomedate" placeholder="Date">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <label for="description">{{ 'Description : ' | trans }}</label>
+                                </div>
+                                <div class="col-xs-6">
+                                    <div class="form-group">
+                                        <textarea class="form-control" id="description" rows="3" placeholder="Enter ..."></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div><!-- /.box-body -->
+                        <div class="box-footer">
+                            <button type="submit" class="btn btn-primary">{{ 'Enregister' | trans }}</button>
+                            <button type="button" class="btn btn-danger pull-right suppDiplome">{{ 'Supperimer' | trans }}</button>
+                        </div><!-- /.box-footer -->
+                    </div>
+                </div> <!-- /.col > box  -->
+                </div>
+            </div>
+
+            <!-- box experience from -->
+            <div id="boxexperiences" style="display:none;">
+                <div class="boxexperiences">
+                    <div class="col-xs-12">
+                        <div class="box box-info">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">{{ 'Diplome' | trans}}</h3>
+                                <div class="box-tools pull-right">
+                                    <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse"><i class="fa fa-minus"></i></button>
+                                </div>
+                            </div>
+                            <div class="box-body">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <label for="experiencetitre">{{ 'Titre : ' | trans }}</label>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="experiencetitre" placeholder="Experience title">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <label for="firstdate">{{ 'A partir de  : ' | trans }}</label>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <div class="form-group">
+                                            <input type="date" class="form-control" id="firstdate" placeholder="From ...">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <label for="enddate">{{ 'A : ' | trans }}</label>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <div class="form-group">
+                                            <input type="date" class="form-control" id="endedate" placeholder="To ...">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <label for="description">{{ 'Description : ' | trans }}</label>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <div class="form-group">
+                                            <textarea class="form-control" id="description" rows="3" placeholder="Enter ..."></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div><!-- /.box-body -->
+                            <div class="box-footer">
+                                <button type="submit" class="btn btn-primary">{{ 'Enregister' | trans }}</button>
+                                <button type="button" class="btn btn-danger pull-right suppExperience">{{ 'Supperimer' | trans }}</button>
+                            </div><!-- /.box-footer -->
+                        </div>
+                    </div> <!-- /.col > box  -->
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- Custom Tabs -->
+                    <div class="nav-tabs-custom">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="true">{{ 'Informations' | trans}}</a></li>
+                            <li class=""><a href="#tab_2" data-toggle="tab" aria-expanded="true">{{ 'Contact' | trans}}</a></li>
+                            <li class=""><a href="#tab_3" data-toggle="tab" aria-expanded="true">{{ 'Diplomes' | trans}} <span class="badge bg-teal" id="nbDiplome">0</span></a></li>
+                            <li class=""><a href="#tab_4" data-toggle="tab" aria-expanded="true">{{ 'Experiences' | trans}} <span class="badge bg-teal" id="nbExperience">0</span></a></li>
+                            <li class=""><a href="#tab_5" data-toggle="tab" aria-expanded="true">{{ 'Autres' | trans}}</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tab_1">
+
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <label for="titre">{{ 'Titre : ' | trans }}</label>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="titre" placeholder="Your Title">
+                                        </div>
+                                    </div>
+                                </div>
+
+                               <div class="row">
+                                   <div class="col-xs-3">
+                                       <label for="nom">{{ 'Nom : ' | trans }}</label>
+                                   </div>
+                                   <div class="col-xs-6">
+                                       <div class="form-group">
+                                           <input type="text" class="form-control" id="nom" placeholder="Your Name">
+                                       </div>
+                                   </div>
+                               </div>
+
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <label for="prenom">{{ 'Prenom : ' | trans }}</label>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="prenom" placeholder="Your second name">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <label for="status">{{ 'Statut : ' | trans }}</label>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <div class="form-group">
+                                            <label>
+                                                <input type="checkbox" name="status">
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="box-footer">
+                                    <button type="submit" class="btn btn-primary">{{ 'Enregister' | trans }}</button>
+                                </div>
+                            </div><!-- /.tab-pane -->
+
+                            <div class="tab-pane" id="tab_2">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <label for="email">{{ 'Email : ' | trans }}</label>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <div class="form-group">
+                                            <input type="email" class="form-control" id="email" placeholder="Your Email">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <label for="Tel">{{ 'Tel : ' | trans }}</label>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="tel" placeholder="Your Phone number">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <label for="fax">{{ 'Fax : ' | trans }}</label>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="fax" placeholder="Your fax">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <label for="webpage">{{ 'Web page : ' | trans }}</label>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="webpage" placeholder="Your web page">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <label for="pays">{{ 'pays : ' | trans }}</label>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <div class="form-group">
+                                            <select class="form-control">
+                                                {% for pays in payss %}
+                                                    <option value="{{ pays.id }}">{{ pays.name | trans }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <label for="ville">{{ 'ville : ' | trans }}</label>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <div class="form-group">
+                                            <select class="form-control">
+                                                {% for ville in villes %}
+                                                    <option value="{{ ville.id }}">{{ ville.name | trans }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <label for="rue">{{ 'Rue : ' | trans }}</label>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="rue" placeholder="Street">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <label for="codepostal">{{ 'Code Postal : ' | trans }}</label>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="ville" placeholder="Code Postal">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="box-footer">
+                                    <button type="submit" class="btn btn-primary">{{ 'Modifier' | trans }}</button>
+                                </div>
+
+                            </div><!-- /.tab-pane -->
+
+                            <div class="tab-pane" id="tab_3">
+
+                                <div class="row" id="content_box_diplomes">
+                                    <!-- hier come the box diplomes forms  -->
+
+                                </div><!-- /.row  -->
+
+                                <div class="box-footer">
+                                    <button type="button" class="btn btn-success" id="addDiplome"><i class="fa fa-fw fa-plus-square"></i> {{ 'Ajouter' | trans }}</button>
+                                </div>
+                            </div><!-- /.tab-pane -->
+
+                            <div class="tab-pane" id="tab_4">
+
+                                <div class="row" id="content_box_experiences">
+                                    <!-- hier come the box experiences forms  -->
+
+                                </div><!-- /.row  -->
+
+                                <div class="box-footer">
+                                    <button type="button" class="btn btn-success" id="addExperience"><i class="fa fa-fw fa-plus-square"></i> {{ 'Ajouter' | trans }}</button>
+                                </div>
+                            </div><!-- /.tab-pane -->
+
+                            <div class="tab-pane" id="tab_5">
+
+                                <div class="row">
+                                    <div class="boxexperiences">
+                                        <div class="col-xs-12">
+                                            <div class="box box-info">
+                                                <div class="box-header with-border">
+                                                    <h3 class="box-title">{{ 'Langues' | trans}}</h3>
+                                                    <div class="box-tools pull-right">
+                                                        <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse"><i class="fa fa-minus"></i></button>
+                                                    </div>
+                                                </div>
+                                                <div class="box-body">
+
+                                                    <div class="row">
+
+                                                        <div class="col-xs-6 col-xs-offset-3">
+                                                            <div class="form-group">
+                                                                <select class="form-control tagschoceslangues">
+                                                                    <option value="0"></option>
+                                                                    {% for langue in langues %}
+                                                                        <option value="{{ langue.id }}">{{ langue.langue | trans }}</option>
+                                                                    {% endfor %}
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-xs-8 col-xs-offset-2">
+                                                                <div class="multi_tags_content">
+                                                                    <ul class="tags_list" id="langue">
+                                                                        <!-- hier come the tags of tools -->
+
+                                                                    </ul>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="boxexperiences">
+                                        <div class="col-xs-12">
+                                            <div class="box box-info">
+                                                <div class="box-header with-border">
+                                                    <h3 class="box-title">{{ 'Domaines' | trans}}</h3>
+                                                    <div class="box-tools pull-right">
+                                                        <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse"><i class="fa fa-minus"></i></button>
+                                                    </div>
+                                                </div>
+                                                <div class="box-body">
+
+                                                    <div class="row">
+                                                        <div class="col-xs-6 col-xs-offset-3">
+                                                            <div class="form-group">
+                                                                <select class="form-control tagschocesdomaines">
+                                                                    <option value="0"></option>
+                                                                    {% for domaine in domaines %}
+                                                                        <option value="{{ domaine.id }}">{{ domaine.domaine | trans }}</option>
+                                                                    {% endfor %}
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col-xs-8 col-xs-offset-2">
+                                                            <div class="multi_tags_content">
+                                                                <ul class="tags_list" id="domaine">
+                                                                    <!-- hier come the tags of tools -->
+
+                                                                </ul>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="boxexperiences">
+                                        <div class="col-xs-12">
+                                            <div class="box box-info">
+                                                <div class="box-header with-border">
+                                                    <h3 class="box-title">{{ 'Tools' | trans}}</h3>
+                                                    <div class="box-tools pull-right">
+                                                        <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse"><i class="fa fa-minus"></i></button>
+                                                    </div>
+                                                </div>
+                                                <div class="box-body">
+
+                                                    <div class="row">
+                                                        <div class="col-xs-6 col-xs-offset-3">
+                                                            <div class="form-group">
+                                                                <select class="form-control tagschocestools">
+                                                                    <option value="0"></option>
+                                                                    {% for tool in tools %}
+                                                                        <option  value="{{ tool.id }}">{{ tool.liblle | trans }}</option>
+                                                                    {% endfor %}
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                         <div class="col-xs-8 col-xs-offset-2">
+                                                             <div class="multi_tags_content">
+                                                                 <ul class="tags_list" id="tools">
+                                                                     <!-- hier come the tags of tools -->
+
+                                                                 </ul>
+
+                                                             </div>
+                                                         </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="box-footer">
+                                    <button type="submit" class="btn btn-primary">{{ 'Enregister' | trans }}</button>
+                                </div>
+                            </div><!-- /.tab-pane -->
+                        </div><!-- /.tab-content -->
+                    </div><!-- nav-tabs-custom -->
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+{% endblock %}
+
+    {% block javascripts %}
+        <!-- page script -->
+        <script>
+
+            /* add un form pour diplome */
+            function addDiplome(){
+                $('#addDiplome').click(function(){
+
+                    /**** add diplome form *****/
+                    $('#boxdiplomes').find(':first').clone(true).appendTo('#content_box_diplomes');
+
+                    /*** change diplomes number   */
+                    $('#nbDiplome').html($('.boxdiplomes').length-1);
+
+
+                });
+            }
+
+            /* add un form pour Experience */
+            function addExperience(){
+                $('#addExperience').click(function(){
+
+                    /**** add Experience form *****/
+                    $('#boxexperiences').find(':first').clone(true).appendTo('#content_box_experiences');
+
+                    /*** change diplomes number   */
+                    $('#nbExperience').html($('.boxexperiences').length-1);
+
+
+                });
+            }
+
+            /*** supprimer un diplome  ****/
+            function suppDiplome(){
+                $('body').on('click', '.suppDiplome', function() {
+                    /****  supprimer un diplome  ***/
+                    $(this).parent().parent().parent().parent().remove();
+                    
+
+                    /*** change diplomes number   */
+                    $('#nbDiplome').html($('.boxdiplomes').length-1);
+
+                });
+            }
+
+
+            /*** supprimer un Experience  ****/
+            function suppExperience(){
+                $('body').on('click', '.suppExperience', function() {
+                    /****  supprimer un Experience  ***/
+                    $(this).parent().parent().parent().parent().remove();
+
+
+                    /*** change Experience number   */
+                    $('#nbExperience').html($('.boxexperiences').length-1);
+
+                });
+            }
+
+            function addliAllTypes(type,source){
+                var html='<li class="alert multi_tags">'+
+                        '<input type="hidden" value="'+$(source).find(":selected").val()+'" name="'+type+'[]" >'+
+                        '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>'+
+                        '<h5>'+$(source).find(":selected").text()+'</h5>'+
+                        '</li>';
+
+                $('#'+type).append(html);
+            }
+
+            /*** add tags  ****/
+            function addTags(){
+                $('body').on('change', '.tagschocestools', function() {
+                    addliAllTypes("tools", this);
+                });
+                $('body').on('change', '.tagschoceslangues', function() {
+                    addliAllTypes("langue", this);
+                });
+                $('body').on('change', '.tagschocesdomaines', function() {
+                    addliAllTypes("domaine", this);
+                });
+            }
+
+            /*******************************/
+            addDiplome();
+            addExperience();
+            suppDiplome();
+            suppExperience();
+            addTags();
+
+        </script>
+    {% endblock %}

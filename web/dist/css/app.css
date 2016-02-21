@@ -1,0 +1,14 @@
+.multi_tags_content{
+    /*min-height: 10px; border: 1px solid #f4f4f4; border-radius: 5px; padding:12px;*/
+}
+
+.tags_list{
+    list-style: none;
+}
+
+.multi_tags{
+    float:left;
+    padding:4px;background-color: #00a65a !important;border-color: #008d4c;
+    border: 1px solid transparent;color:white;
+    border-radius: 4px; margin-left:5px;min-width: 105px;
+}

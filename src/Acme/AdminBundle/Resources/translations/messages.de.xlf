@@ -3,9 +3,14 @@
     <file source-language="fr" target-language="de" datatype="plaintext" original="file.ext">
         <body>
             <trans-unit id="1">
-                <source>test</source>
-                <target>the der Test ist der gröste</target>
+                <source>Client</source>
+                <target>Kund</target>
             </trans-unit>
+            <trans-unit id="2">
+                     <source>Profile</source>
+                      <target>Profil</target>
+            </trans-unit>
+
         </body>
     </file>
 </xliff>
