@@ -24,72 +24,7 @@
                 <div class="boxdiplomes">
                     <div class="col-xs-12">
                     <div class="box box-info">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">{{ 'Diplome' | trans}}</h3>
-                            <div class="box-tools pull-right">
-                                <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse"><i class="fa fa-minus"></i></button>
-                            </div>
-                        </div>
-                        <div class="box-body">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <label for="diplometitre">{{ 'Titre : ' | trans }}</label>
-                                </div>
-                                <div class="col-xs-6">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" id="diplometitre" placeholder="Diplome title">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <label for="institut">{{ 'Institut : ' | trans }}</label>
-                                </div>
-                                <div class="col-xs-6">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" id="institut" placeholder="Institut">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <label for="diplomedate">{{ 'Date : ' | trans }}</label>
-                                </div>
-                                <div class="col-xs-6">
-                                    <div class="form-group">
-                                        <input type="date" class="form-control" id="diplomedate" placeholder="Date">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <label for="description">{{ 'Description : ' | trans }}</label>
-                                </div>
-                                <div class="col-xs-6">
-                                    <div class="form-group">
-                                        <textarea class="form-control" id="description" rows="3" placeholder="Enter ..."></textarea>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div><!-- /.box-body -->
-                        <div class="box-footer">
-                            <button type="submit" class="btn btn-primary">{{ 'Enregister' | trans }}</button>
-                            <button type="button" class="btn btn-danger pull-right suppDiplome">{{ 'Supperimer' | trans }}</button>
-                        </div><!-- /.box-footer -->
-                    </div>
-                </div> <!-- /.col > box  -->
-                </div>
-            </div>
-
-            <!-- box experience from -->
-            <div id="boxexperiences" style="display:none;">
-                <div class="boxexperiences">
-                    <div class="col-xs-12">
-                        <div class="box box-info">
+                        <form method="POST" action="{{ path('diplomes') }}" class="ajaxForm">
                             <div class="box-header with-border">
                                 <h3 class="box-title">{{ 'Diplome' | trans}}</h3>
                                 <div class="box-tools pull-right">
@@ -99,33 +34,33 @@
                             <div class="box-body">
                                 <div class="row">
                                     <div class="col-xs-3">
-                                        <label for="experiencetitre">{{ 'Titre : ' | trans }}</label>
+                                        <label for="diplometitre">{{ 'Titre : ' | trans }}</label>
                                     </div>
                                     <div class="col-xs-6">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" id="experiencetitre" placeholder="Experience title">
+                                            <input type="text" name="titre" class="form-control" id="diplometitre" placeholder="Diplome title">
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-xs-3">
-                                        <label for="firstdate">{{ 'A partir de  : ' | trans }}</label>
+                                        <label for="institut">{{ 'Institut : ' | trans }}</label>
                                     </div>
                                     <div class="col-xs-6">
                                         <div class="form-group">
-                                            <input type="date" class="form-control" id="firstdate" placeholder="From ...">
+                                            <input type="text" name="institut" class="form-control" id="institut" placeholder="Institut">
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-xs-3">
-                                        <label for="enddate">{{ 'A : ' | trans }}</label>
+                                        <label for="diplomedate">{{ 'Date : ' | trans }}</label>
                                     </div>
                                     <div class="col-xs-6">
                                         <div class="form-group">
-                                            <input type="date" class="form-control" id="endedate" placeholder="To ...">
+                                            <input type="date" name="date" class="form-control" id="diplomedate" placeholder="Date">
                                         </div>
                                     </div>
                                 </div>
@@ -136,21 +71,94 @@
                                     </div>
                                     <div class="col-xs-6">
                                         <div class="form-group">
-                                            <textarea class="form-control" id="description" rows="3" placeholder="Enter ..."></textarea>
+                                            <textarea class="form-control" name="description" id="description" rows="3" placeholder="Enter ..."></textarea>
                                         </div>
                                     </div>
                                 </div>
 
                             </div><!-- /.box-body -->
                             <div class="box-footer">
-                                <button type="submit" class="btn btn-primary">{{ 'Enregister' | trans }}</button>
-                                <button type="button" class="btn btn-danger pull-right suppExperience">{{ 'Supperimer' | trans }}</button>
+                                <button type="submit" name="add" value="change"  class="btn btn-primary">{{ 'Enregister' | trans }}</button>
+                                <button type="submit" name="delete" value="delete"  class="btn btn-danger pull-right suppDiplome">{{ 'Supperimer' | trans }}</button>
                             </div><!-- /.box-footer -->
+                        </form>
+                    </div>
+                  </div> <!-- /.col > box  -->
+                </div>
+            </div>
+
+            <!-- box experience from -->
+            <div id="boxexperiences" style="display:none;">
+                <div class="boxexperiences">
+                    <div class="col-xs-12">
+                        <div class="box box-info">
+                            <form method="POST" action="{{ path('experiences') }}" class="ajaxForm">
+                                <div class="box-header with-border">
+                                    <h3 class="box-title">{{ 'Diplome' | trans}}</h3>
+                                    <div class="box-tools pull-right">
+                                        <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse"><i class="fa fa-minus"></i></button>
+                                    </div>
+                                </div>
+                                <div class="box-body">
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <label for="experiencetitre">{{ 'Titre : ' | trans }}</label>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <div class="form-group">
+                                                <input type="text" name="titre" class="form-control" id="experiencetitre" placeholder="Experience title">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <label for="firstdate">{{ 'A partir de  : ' | trans }}</label>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <div class="form-group">
+                                                <input type="date" name="firstdata" class="form-control" id="firstdate" placeholder="From ...">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <label for="enddate">{{ 'A : ' | trans }}</label>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <div class="form-group">
+                                                <input type="date"  name="seconddate" class="form-control" id="endedate" placeholder="To ...">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <label for="description">{{ 'Description : ' | trans }}</label>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <div class="form-group">
+                                                <textarea class="form-control" name="description" id="description" rows="3" placeholder="Enter ..."></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div><!-- /.box-body -->
+                                <div class="box-footer">
+                                    <button type="submit" name="add" value="change"  class="btn btn-primary">{{ 'Enregister' | trans }}</button>
+                                    <button type="submit" name="delete" value="delete"  class="btn btn-danger pull-right suppExperience">{{ 'Supperimer' | trans }}</button>
+                                </div><!-- /.box-footer -->
+                            </form>
                         </div>
                     </div> <!-- /.col > box  -->
                 </div>
             </div>
+            <div class="row">
+                <div class="col-xs-12" id="message">
 
+                </div>
+            </div>
 
             <div class="row">
                 <div class="col-md-12">
@@ -166,157 +174,165 @@
                         <div class="tab-content">
                             <div class="tab-pane active" id="tab_1">
 
-                                <div class="row">
-                                    <div class="col-xs-3">
-                                        <label for="titre">{{ 'Titre : ' | trans }}</label>
-                                    </div>
-                                    <div class="col-xs-6">
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" id="titre" placeholder="Your Title">
+                                <!-- form for informations -->
+                                <form method="POST" action="{{ path('informations') }}" class="ajaxForm">
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <label for="titre">{{ 'Titre : ' | trans }}</label>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <div class="form-group">
+                                                <input type="text" name="titre" class="form-control" id="titre" placeholder="Your Title">
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                               <div class="row">
-                                   <div class="col-xs-3">
-                                       <label for="nom">{{ 'Nom : ' | trans }}</label>
-                                   </div>
-                                   <div class="col-xs-6">
-                                       <div class="form-group">
-                                           <input type="text" class="form-control" id="nom" placeholder="Your Name">
-                                       </div>
-                                   </div>
-                               </div>
-
-                                <div class="row">
-                                    <div class="col-xs-3">
-                                        <label for="prenom">{{ 'Prenom : ' | trans }}</label>
-                                    </div>
-                                    <div class="col-xs-6">
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" id="prenom" placeholder="Your second name">
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <label for="nom">{{ 'Nom : ' | trans }}</label>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <div class="form-group">
+                                                <input type="text"  name="nom" class="form-control" id="nom" placeholder="Your Name">
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="row">
-                                    <div class="col-xs-3">
-                                        <label for="status">{{ 'Statut : ' | trans }}</label>
-                                    </div>
-                                    <div class="col-xs-6">
-                                        <div class="form-group">
-                                            <label>
-                                                <input type="checkbox" name="status">
-                                            </label>
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <label for="prenom">{{ 'Prenom : ' | trans }}</label>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <div class="form-group">
+                                                <input type="text" name="prenom" class="form-control" id="prenom" placeholder="Your second name">
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="box-footer">
-                                    <button type="submit" class="btn btn-primary">{{ 'Enregister' | trans }}</button>
-                                </div>
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <label for="status">{{ 'Statut : ' | trans }}</label>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <div class="form-group">
+                                                <label>
+                                                    <input type="checkbox" name="status">
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="box-footer">
+                                        <button type="submit" class="btn btn-primary">{{ 'Enregister' | trans }}</button>
+                                    </div>
+
+                                </form><!-- /.form -->
                             </div><!-- /.tab-pane -->
 
                             <div class="tab-pane" id="tab_2">
-                                <div class="row">
-                                    <div class="col-xs-3">
-                                        <label for="email">{{ 'Email : ' | trans }}</label>
-                                    </div>
-                                    <div class="col-xs-6">
-                                        <div class="form-group">
-                                            <input type="email" class="form-control" id="email" placeholder="Your Email">
+
+                                <!-- contact form  -->
+                                <form method="POST" action="{{ path('contact')}}" class="ajaxForm">
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <label for="email">{{ 'Email : ' | trans }}</label>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <div class="form-group">
+                                                <input type="email" name="email" class="form-control" id="email" placeholder="Your Email">
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="row">
-                                    <div class="col-xs-3">
-                                        <label for="Tel">{{ 'Tel : ' | trans }}</label>
-                                    </div>
-                                    <div class="col-xs-6">
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" id="tel" placeholder="Your Phone number">
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <label for="Tel">{{ 'Tel : ' | trans }}</label>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <div class="form-group">
+                                                <input type="text" name="tel" class="form-control" id="tel" placeholder="Your Phone number">
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="row">
-                                    <div class="col-xs-3">
-                                        <label for="fax">{{ 'Fax : ' | trans }}</label>
-                                    </div>
-                                    <div class="col-xs-6">
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" id="fax" placeholder="Your fax">
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <label for="fax">{{ 'Fax : ' | trans }}</label>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <div class="form-group">
+                                                <input type="text" name="fax" class="form-control" id="fax" placeholder="Your fax">
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="row">
-                                    <div class="col-xs-3">
-                                        <label for="webpage">{{ 'Web page : ' | trans }}</label>
-                                    </div>
-                                    <div class="col-xs-6">
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" id="webpage" placeholder="Your web page">
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <label for="webpage">{{ 'Web page : ' | trans }}</label>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <div class="form-group">
+                                                <input type="text" name="webpage" class="form-control" id="webpage" placeholder="Your web page">
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="row">
-                                    <div class="col-xs-3">
-                                        <label for="pays">{{ 'pays : ' | trans }}</label>
-                                    </div>
-                                    <div class="col-xs-6">
-                                        <div class="form-group">
-                                            <select class="form-control">
-                                                {% for pays in payss %}
-                                                    <option value="{{ pays.id }}">{{ pays.name | trans }}</option>
-                                                {% endfor %}
-                                            </select>
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <label for="pays">{{ 'pays : ' | trans }}</label>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <div class="form-group">
+                                                <select name="pays" class="form-control">
+                                                    {% for pays in payss %}
+                                                        <option value="{{ pays.id }}">{{ pays.name | trans }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="row">
-                                    <div class="col-xs-3">
-                                        <label for="ville">{{ 'ville : ' | trans }}</label>
-                                    </div>
-                                    <div class="col-xs-6">
-                                        <div class="form-group">
-                                            <select class="form-control">
-                                                {% for ville in villes %}
-                                                    <option value="{{ ville.id }}">{{ ville.name | trans }}</option>
-                                                {% endfor %}
-                                            </select>
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <label for="ville">{{ 'ville : ' | trans }}</label>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <div class="form-group">
+                                                <select name="ville" class="form-control">
+                                                    {% for ville in villes %}
+                                                        <option value="{{ ville.id }}">{{ ville.name | trans }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="row">
-                                    <div class="col-xs-3">
-                                        <label for="rue">{{ 'Rue : ' | trans }}</label>
-                                    </div>
-                                    <div class="col-xs-6">
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" id="rue" placeholder="Street">
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <label for="rue">{{ 'Rue : ' | trans }}</label>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <div class="form-group">
+                                                <input type="text" name="rue" class="form-control" id="rue" placeholder="Street">
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="row">
-                                    <div class="col-xs-3">
-                                        <label for="codepostal">{{ 'Code Postal : ' | trans }}</label>
-                                    </div>
-                                    <div class="col-xs-6">
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" id="ville" placeholder="Code Postal">
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <label for="codepostal">{{ 'Code Postal : ' | trans }}</label>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <div class="form-group">
+                                                <input type="text" name="codepostal" class="form-control" id="ville" placeholder="Code Postal">
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="box-footer">
-                                    <button type="submit" class="btn btn-primary">{{ 'Modifier' | trans }}</button>
-                                </div>
+                                    <div class="box-footer">
+                                        <button type="submit" class="btn btn-primary">{{ 'Modifier' | trans }}</button>
+                                    </div>
+                                </form>
 
                             </div><!-- /.tab-pane -->
 
@@ -347,7 +363,7 @@
                             <div class="tab-pane" id="tab_5">
 
                                 <div class="row">
-                                    <div class="boxexperiences">
+                                    <div class="boxautres">
                                         <div class="col-xs-12">
                                             <div class="box box-info">
                                                 <div class="box-header with-border">
@@ -391,7 +407,7 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="boxexperiences">
+                                    <div class="boxautres">
                                         <div class="col-xs-12">
                                             <div class="box box-info">
                                                 <div class="box-header with-border">
@@ -435,7 +451,7 @@
 
 
                                 <div class="row">
-                                    <div class="boxexperiences">
+                                    <div class="boxautres">
                                         <div class="col-xs-12">
                                             <div class="box box-info">
                                                 <div class="box-header with-border">
@@ -497,6 +513,54 @@
         <!-- page script -->
         <script>
 
+            /*  submit Change on the Profil(= add Action || modify action) */
+            function submitChange() {
+                $('body').on('submit', '.ajaxForm', function (e) {
+
+                    e.preventDefault();
+                    var sourceElem = $(this);
+                    $.ajax({
+                        type: $(this).attr('method'),
+                        url: $(this).attr('action'),
+                        data: $(this).serialize(),
+                        dataType: 'json',
+                        success: function (data, statut) {
+                                if((data["form"]=="diplomes" && data["action"]=="persist")){
+                                    var html='<input type="hidden" name="idDiplome" value="'+data["idDiplome"]+'">';
+                                    sourceElem.prepend(html);
+                                }
+                                else if((data["form"]=="experiences" && data["action"]=="persist")){
+                                    var html='<input type="hidden" name="idExperience" value="'+data["idExperience"]+'">';
+                                    sourceElem.prepend(html);
+                                }
+                                showMessage(data["message"]);
+
+                        },
+
+                        error: function (resultat, statut, erreur) {
+                            showMessage(erreur);
+                        },
+
+                        complete: function (resultat, statut) {
+
+                        }
+                    });
+
+                });
+            }
+
+            /**  show returened actions messages */
+            function showMessage(message){
+
+                var html='<div class="alert alert-info alert-dismissable ">'+
+                         '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>'+message+'</div>';
+
+                $('#message').html(null);
+                setTimeout( function(){$('#message').html(html)},400 );
+
+
+            }
+
             /* add un form pour diplome */
             function addDiplome(){
                 $('#addDiplome').click(function(){
@@ -529,8 +593,8 @@
             function suppDiplome(){
                 $('body').on('click', '.suppDiplome', function() {
                     /****  supprimer un diplome  ***/
-                    $(this).parent().parent().parent().parent().remove();
-                    
+                    $(this).parent().parent().parent().parent().parent().remove();
+
 
                     /*** change diplomes number   */
                     $('#nbDiplome').html($('.boxdiplomes').length-1);
@@ -581,6 +645,9 @@
             suppDiplome();
             suppExperience();
             addTags();
+
+            /****** submit change on the ptofile  */
+            submitChange();
 
         </script>
     {% endblock %}
