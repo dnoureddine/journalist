@@ -30,6 +30,13 @@ class Ville
     private $name;
 
     /**
+     * @ORM\ManyToOne(targetEntity="State", inversedBy="villes")
+     * @ORM\JoinColumn(name="state_id", referencedColumnName="id", nullable=FALSE)
+     */
+    protected $state;
+
+
+    /**
      *  @var ArrayCollection $users
      * @ORM\OneToMany(targetEntity="User", mappedBy="ville", cascade={"persist", "remove", "merge"})
      */
@@ -110,5 +117,30 @@ class Ville
     public function getUsers()
     {
         return $this->users;
+    }
+
+
+    /**
+     * Set state
+     *
+     * @param \UserBundle\Entity\State $state
+     *
+     * @return Ville
+     */
+    public function setState(\UserBundle\Entity\State $state)
+    {
+        $this->state = $state;
+
+        return $this;
+    }
+
+    /**
+     * Get state
+     *
+     * @return \UserBundle\Entity\State
+     */
+    public function getState()
+    {
+        return $this->state;
     }
 }

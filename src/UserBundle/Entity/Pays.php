@@ -30,6 +30,18 @@ class Pays
     private $name;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="sortname", type="string", length=255)
+     */
+    private $sortname;
+
+    /**
+     * @ORM\OneToMany(targetEntity="State", mappedBy="pays", cascade={"persist","remove"})
+     */
+    protected $states;
+
+    /**
      *  @var ArrayCollection $users
      * @ORM\OneToMany(targetEntity="User", mappedBy="pays", cascade={"persist", "remove", "merge"})
      */
@@ -40,6 +52,7 @@ class Pays
         parent::__construct();
         // your own logic
         $this->users= new ArrayCollection();
+        $this->states=new ArrayCollection();
     }
 
 
@@ -109,5 +122,65 @@ class Pays
     public function getUsers()
     {
         return $this->users;
+    }
+
+
+
+    /**
+     * Set sortname
+     *
+     * @param string $sortname
+     *
+     * @return Pays
+     */
+    public function setSortname($sortname)
+    {
+        $this->sortname = $sortname;
+
+        return $this;
+    }
+
+    /**
+     * Get sortname
+     *
+     * @return string
+     */
+    public function getSortname()
+    {
+        return $this->sortname;
+    }
+
+    /**
+     * Add state
+     *
+     * @param \UserBundle\Entity\State $state
+     *
+     * @return Pays
+     */
+    public function addState(\UserBundle\Entity\State $state)
+    {
+        $this->states[] = $state;
+
+        return $this;
+    }
+
+    /**
+     * Remove state
+     *
+     * @param \UserBundle\Entity\State $state
+     */
+    public function removeState(\UserBundle\Entity\State $state)
+    {
+        $this->states->removeElement($state);
+    }
+
+    /**
+     * Get states
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getStates()
+    {
+        return $this->states;
     }
 }

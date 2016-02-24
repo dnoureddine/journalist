@@ -117,7 +117,7 @@
                                         </div>
                                         <div class="col-xs-6">
                                             <div class="form-group">
-                                                <input type="date" name="firstdata" class="form-control" id="firstdate" placeholder="From ...">
+                                                <input type="date" name="firstdate" class="form-control" id="firstdate" placeholder="From ...">
                                             </div>
                                         </div>
                                     </div>
@@ -167,9 +167,10 @@
                         <ul class="nav nav-tabs">
                             <li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="true">{{ 'Informations' | trans}}</a></li>
                             <li class=""><a href="#tab_2" data-toggle="tab" aria-expanded="true">{{ 'Contact' | trans}}</a></li>
-                            <li class=""><a href="#tab_3" data-toggle="tab" aria-expanded="true">{{ 'Diplomes' | trans}} <span class="badge bg-teal" id="nbDiplome">0</span></a></li>
-                            <li class=""><a href="#tab_4" data-toggle="tab" aria-expanded="true">{{ 'Experiences' | trans}} <span class="badge bg-teal" id="nbExperience">0</span></a></li>
+                            <li class=""><a href="#tab_3" data-toggle="tab" aria-expanded="true">{{ 'Diplomes' | trans}} <span class="badge bg-teal" id="nbDiplome">{{ diplomes|length }}</span></a></li>
+                            <li class=""><a href="#tab_4" data-toggle="tab" aria-expanded="true">{{ 'Experiences' | trans}} <span class="badge bg-teal" id="nbExperience">{{ experiences|length }}</span></a></li>
                             <li class=""><a href="#tab_5" data-toggle="tab" aria-expanded="true">{{ 'Autres' | trans}}</a></li>
+                            <li class=""><a href="#" data-toggle="tab" aria-expanded="true"><img src="{{ asset('dist/img/checked.png')}}" height="25px" width="25px" id="checked" style="display:none;"><img src="{{ asset('dist/img/progress.gif')}}" height="25px" width="25px" id="progress" style="display:none;"></a></li>
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane active" id="tab_1">
@@ -182,7 +183,7 @@
                                         </div>
                                         <div class="col-xs-6">
                                             <div class="form-group">
-                                                <input type="text" name="titre" class="form-control" id="titre" placeholder="Your Title">
+                                                <input type="text" name="titre" value="{{ user ? user.titre }}" class="form-control" id="titre" placeholder="Your Title">
                                             </div>
                                         </div>
                                     </div>
@@ -193,7 +194,7 @@
                                         </div>
                                         <div class="col-xs-6">
                                             <div class="form-group">
-                                                <input type="text"  name="nom" class="form-control" id="nom" placeholder="Your Name">
+                                                <input type="text"  name="nom" value="{{ user ? user.nom }}" class="form-control" id="nom" placeholder="Your Name">
                                             </div>
                                         </div>
                                     </div>
@@ -204,7 +205,7 @@
                                         </div>
                                         <div class="col-xs-6">
                                             <div class="form-group">
-                                                <input type="text" name="prenom" class="form-control" id="prenom" placeholder="Your second name">
+                                                <input type="text" name="prenom" value="{{ user ? user.prenom }}"  class="form-control" id="prenom" placeholder="Your second name">
                                             </div>
                                         </div>
                                     </div>
@@ -216,7 +217,13 @@
                                         <div class="col-xs-6">
                                             <div class="form-group">
                                                 <label>
-                                                    <input type="checkbox" name="status">
+                                                    {% if user!=null %}
+                                                        {% if user.status==1 %}
+                                                            <input type="checkbox" name="status" checked >
+                                                        {% else %}
+                                                            <input type="checkbox" name="status">
+                                                        {% endif %}
+                                                    {% endif %}
                                                 </label>
                                             </div>
                                         </div>
@@ -239,7 +246,7 @@
                                         </div>
                                         <div class="col-xs-6">
                                             <div class="form-group">
-                                                <input type="email" name="email" class="form-control" id="email" placeholder="Your Email">
+                                                <input type="email" name="email" value="{{ user ? user.email }}" class="form-control" id="email" placeholder="Your Email">
                                             </div>
                                         </div>
                                     </div>
@@ -250,7 +257,7 @@
                                         </div>
                                         <div class="col-xs-6">
                                             <div class="form-group">
-                                                <input type="text" name="tel" class="form-control" id="tel" placeholder="Your Phone number">
+                                                <input type="text" name="tel" value="{{ user ? user.tel }}" class="form-control" id="tel" placeholder="Your Phone number">
                                             </div>
                                         </div>
                                     </div>
@@ -261,7 +268,7 @@
                                         </div>
                                         <div class="col-xs-6">
                                             <div class="form-group">
-                                                <input type="text" name="fax" class="form-control" id="fax" placeholder="Your fax">
+                                                <input type="text" name="fax" class="form-control" value="{{ user ? user.fax }}" id="fax" placeholder="Your fax">
                                             </div>
                                         </div>
                                     </div>
@@ -272,7 +279,7 @@
                                         </div>
                                         <div class="col-xs-6">
                                             <div class="form-group">
-                                                <input type="text" name="webpage" class="form-control" id="webpage" placeholder="Your web page">
+                                                <input type="text" name="webpage" class="form-control" value="{{ user ? user.page }}" id="webpage" placeholder="Your web page">
                                             </div>
                                         </div>
                                     </div>
@@ -285,7 +292,7 @@
                                             <div class="form-group">
                                                 <select name="pays" class="form-control">
                                                     {% for pays in payss %}
-                                                        <option value="{{ pays.id }}">{{ pays.name | trans }}</option>
+                                                        <option value="{{ pays.id }}" {{ user ? user.pays ? user.pays.id==pays.id ? 'selected' }}>{{ pays.sortname | trans }}</option>
                                                     {% endfor %}
                                                 </select>
                                             </div>
@@ -300,7 +307,7 @@
                                             <div class="form-group">
                                                 <select name="ville" class="form-control">
                                                     {% for ville in villes %}
-                                                        <option value="{{ ville.id }}">{{ ville.name | trans }}</option>
+                                                        <option value="{{ ville.id }}" {{ user ? user.ville ? user.ville.id==ville.id ? 'selected' }}>{{ ville.name | trans }}</option>
                                                     {% endfor %}
                                                 </select>
                                             </div>
@@ -313,7 +320,7 @@
                                         </div>
                                         <div class="col-xs-6">
                                             <div class="form-group">
-                                                <input type="text" name="rue" class="form-control" id="rue" placeholder="Street">
+                                                <input type="text" name="rue" value="{{ user ? user.rue }}" class="form-control" id="rue" placeholder="Street">
                                             </div>
                                         </div>
                                     </div>
@@ -324,7 +331,7 @@
                                         </div>
                                         <div class="col-xs-6">
                                             <div class="form-group">
-                                                <input type="text" name="codepostal" class="form-control" id="ville" placeholder="Code Postal">
+                                                <input type="text" name="codepostal" value="{{ user ? user.codepostal }}" class="form-control" id="ville" placeholder="Code Postal">
                                             </div>
                                         </div>
                                     </div>
@@ -340,7 +347,73 @@
 
                                 <div class="row" id="content_box_diplomes">
                                     <!-- hier come the box diplomes forms  -->
+                                    {% for diplome in diplomes %}
+                                        <div class="boxdiplomes">
+                                            <div class="col-xs-12">
+                                                <div class="box box-info">
+                                                    <form method="POST" action="{{ path('diplomes') }}" class="ajaxForm">
+                                                        <input type="hidden" name="idDiplome" value="{{ diplome.id}}">
+                                                        <div class="box-header with-border">
+                                                            <h3 class="box-title">{{ 'Diplome' | trans}}</h3>
+                                                            <div class="box-tools pull-right">
+                                                                <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse"><i class="fa fa-minus"></i></button>
+                                                            </div>
+                                                        </div>
+                                                        <div class="box-body">
+                                                            <div class="row">
+                                                                <div class="col-xs-3">
+                                                                    <label for="diplometitre">{{ 'Titre : ' | trans }}</label>
+                                                                </div>
+                                                                <div class="col-xs-6">
+                                                                    <div class="form-group">
+                                                                        <input type="text" name="titre" value="{{ diplome.titre }}" class="form-control" id="diplometitre" placeholder="Diplome title">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
 
+                                                            <div class="row">
+                                                                <div class="col-xs-3">
+                                                                    <label for="institut">{{ 'Institut : ' | trans }}</label>
+                                                                </div>
+                                                                <div class="col-xs-6">
+                                                                    <div class="form-group">
+                                                                        <input type="text" name="institut" value="{{ diplome.institut }}" class="form-control" id="institut" placeholder="Institut">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="row">
+                                                                <div class="col-xs-3">
+                                                                    <label for="diplomedate">{{ 'Date : ' | trans }}</label>
+                                                                </div>
+                                                                <div class="col-xs-6">
+                                                                    <div class="form-group">
+                                                                        <input type="date" name="date" value="{{ diplome.date|date('Y-m-d') }}" class="form-control" id="diplomedate" placeholder="Date">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="row">
+                                                                <div class="col-xs-3">
+                                                                    <label for="description">{{ 'Description : ' | trans }}</label>
+                                                                </div>
+                                                                <div class="col-xs-6">
+                                                                    <div class="form-group">
+                                                                        <textarea class="form-control"  name="description" id="description" rows="3" placeholder="Enter ...">{{ diplome.description }}</textarea>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div><!-- /.box-body -->
+                                                        <div class="box-footer">
+                                                            <button type="submit" name="add" value="change"  class="btn btn-primary">{{ 'Enregister' | trans }}</button>
+                                                            <button type="submit" name="delete" value="delete"  class="btn btn-danger pull-right suppDiplome">{{ 'Supperimer' | trans }}</button>
+                                                        </div><!-- /.box-footer -->
+                                                    </form>
+                                                </div>
+                                            </div> <!-- /.col > box  -->
+                                        </div>
+                                    {% endfor %}
                                 </div><!-- /.row  -->
 
                                 <div class="box-footer">
@@ -352,6 +425,73 @@
 
                                 <div class="row" id="content_box_experiences">
                                     <!-- hier come the box experiences forms  -->
+                                    {% for experience in experiences %}
+                                        <div class="boxexperiences">
+                                            <div class="col-xs-12">
+                                                <div class="box box-info">
+                                                    <form method="POST" action="{{ path('experiences') }}" class="ajaxForm">
+                                                        <input type="hidden" name="idExperience" value="{{ experience.id}}">
+                                                        <div class="box-header with-border">
+                                                            <h3 class="box-title">{{ 'Experience' | trans}}</h3>
+                                                            <div class="box-tools pull-right">
+                                                                <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse"><i class="fa fa-minus"></i></button>
+                                                            </div>
+                                                        </div>
+                                                        <div class="box-body">
+                                                            <div class="row">
+                                                                <div class="col-xs-3">
+                                                                    <label for="experiencetitre">{{ 'Titre : ' | trans }}</label>
+                                                                </div>
+                                                                <div class="col-xs-6">
+                                                                    <div class="form-group">
+                                                                        <input type="text" name="titre" value="{{ experience.titre }}" class="form-control" id="experiencetitre" placeholder="Experience title">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="row">
+                                                                <div class="col-xs-3">
+                                                                    <label for="firstdate">{{ 'A partir de  : ' | trans }}</label>
+                                                                </div>
+                                                                <div class="col-xs-6">
+                                                                    <div class="form-group">
+                                                                        <input type="date" name="firstdate" value="{{ experience.datestart|date('Y-m-d') }}" class="form-control" id="firstdate" placeholder="From ...">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="row">
+                                                                <div class="col-xs-3">
+                                                                    <label for="enddate">{{ 'A : ' | trans }}</label>
+                                                                </div>
+                                                                <div class="col-xs-6">
+                                                                    <div class="form-group">
+                                                                        <input type="date"  name="seconddate" value="{{ experience.dateend|date('Y-m-d') }}" class="form-control" id="endedate" placeholder="To ...">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="row">
+                                                                <div class="col-xs-3">
+                                                                    <label for="description">{{ 'Description : ' | trans }}</label>
+                                                                </div>
+                                                                <div class="col-xs-6">
+                                                                    <div class="form-group">
+                                                                        <textarea class="form-control" name="description"  id="description" rows="3" placeholder="Enter ...">{{ experience.description}}</textarea>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div><!-- /.box-body -->
+                                                        <div class="box-footer">
+                                                            <button type="submit" name="add" value="change"  class="btn btn-primary">{{ 'Enregister' | trans }}</button>
+                                                            <button type="submit" name="delete" value="delete"  class="btn btn-danger pull-right suppExperience">{{ 'Supperimer' | trans }}</button>
+                                                        </div><!-- /.box-footer -->
+                                                    </form>
+                                                </div>
+                                            </div> <!-- /.col > box  -->
+                                        </div>
+                                    {% endfor %}
 
                                 </div><!-- /.row  -->
 
@@ -362,36 +502,96 @@
 
                             <div class="tab-pane" id="tab_5">
 
-                                <div class="row">
-                                    <div class="boxautres">
-                                        <div class="col-xs-12">
-                                            <div class="box box-info">
-                                                <div class="box-header with-border">
-                                                    <h3 class="box-title">{{ 'Langues' | trans}}</h3>
-                                                    <div class="box-tools pull-right">
-                                                        <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse"><i class="fa fa-minus"></i></button>
+                                <form action="{{ path('autres') }}" method="POST" class="ajaxForm">
+                                    <div class="row">
+                                        <div class="boxautres">
+                                            <div class="col-xs-12">
+                                                <div class="box box-info">
+                                                    <div class="box-header with-border">
+                                                        <h3 class="box-title">{{ 'Langues' | trans}}</h3>
+                                                        <div class="box-tools pull-right">
+                                                            <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse"><i class="fa fa-minus"></i></button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="box-body">
+
+                                                        <div class="row">
+
+                                                            <div class="col-xs-6 col-xs-offset-3">
+                                                                <div class="form-group">
+                                                                    <select class="form-control tagschoceslangues">
+                                                                        <option value="0"></option>
+                                                                        {% for langue in langues %}
+                                                                            <option value="{{ langue.id }}">{{ langue.langue | trans }}</option>
+                                                                        {% endfor %}
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="row">
+                                                                <div class="col-xs-8 col-xs-offset-2">
+                                                                    <div class="multi_tags_content">
+                                                                        <ul class="tags_list" id="langue">
+                                                                            <!-- hier come the tags of tools -->
+                                                                            {% for userLangue in userLangues %}
+                                                                                <li class="alert multi_tags">
+                                                                                   <input type="hidden" class="langue" value="{{ userLangue.id }}" name="langue[]" >
+                                                                                   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                                                                   <h5>{{ userLangue.langue }}</h5>
+                                                                                </li>
+                                                                            {% endfor %}
+
+                                                                        </ul>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="box-body">
+                                            </div>
+                                        </div>
+                                    </div>
 
-                                                    <div class="row">
+                                    <div class="row">
+                                        <div class="boxautres">
+                                            <div class="col-xs-12">
+                                                <div class="box box-info">
+                                                    <div class="box-header with-border">
+                                                        <h3 class="box-title">{{ 'Domaines' | trans}}</h3>
+                                                        <div class="box-tools pull-right">
+                                                            <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse"><i class="fa fa-minus"></i></button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="box-body">
 
-                                                        <div class="col-xs-6 col-xs-offset-3">
-                                                            <div class="form-group">
-                                                                <select class="form-control tagschoceslangues">
-                                                                    <option value="0"></option>
-                                                                    {% for langue in langues %}
-                                                                        <option value="{{ langue.id }}">{{ langue.langue | trans }}</option>
-                                                                    {% endfor %}
-                                                                </select>
+                                                        <div class="row">
+                                                            <div class="col-xs-6 col-xs-offset-3">
+                                                                <div class="form-group">
+                                                                    <select class="form-control tagschocesdomaines">
+                                                                        <option value="0"></option>
+                                                                        {% for domaine in domaines %}
+                                                                            <option value="{{ domaine.id }}">{{ domaine.domaine | trans }}</option>
+                                                                        {% endfor %}
+                                                                    </select>
+                                                                </div>
                                                             </div>
                                                         </div>
 
                                                         <div class="row">
                                                             <div class="col-xs-8 col-xs-offset-2">
                                                                 <div class="multi_tags_content">
-                                                                    <ul class="tags_list" id="langue">
+                                                                    <ul class="tags_list" id="domaine">
                                                                         <!-- hier come the tags of tools -->
+
+                                                                        {% for userDomaine in userDomaines %}
+                                                                            <li class="alert multi_tags">
+                                                                                <input type="hidden" class="domaine" value="{{ userDomaine.id }}" name="domaine[]" >
+                                                                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                                                                <h5>{{ userDomaine.domaine }}</h5>
+                                                                            </li>
+                                                                        {% endfor %}
 
                                                                     </ul>
 
@@ -404,98 +604,64 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="row">
-                                    <div class="boxautres">
-                                        <div class="col-xs-12">
-                                            <div class="box box-info">
-                                                <div class="box-header with-border">
-                                                    <h3 class="box-title">{{ 'Domaines' | trans}}</h3>
-                                                    <div class="box-tools pull-right">
-                                                        <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse"><i class="fa fa-minus"></i></button>
-                                                    </div>
-                                                </div>
-                                                <div class="box-body">
 
-                                                    <div class="row">
-                                                        <div class="col-xs-6 col-xs-offset-3">
-                                                            <div class="form-group">
-                                                                <select class="form-control tagschocesdomaines">
-                                                                    <option value="0"></option>
-                                                                    {% for domaine in domaines %}
-                                                                        <option value="{{ domaine.id }}">{{ domaine.domaine | trans }}</option>
-                                                                    {% endfor %}
-                                                                </select>
-                                                            </div>
+                                    <div class="row">
+                                        <div class="boxautres">
+                                            <div class="col-xs-12">
+                                                <div class="box box-info">
+                                                    <div class="box-header with-border">
+                                                        <h3 class="box-title">{{ 'Tools' | trans}}</h3>
+                                                        <div class="box-tools pull-right">
+                                                            <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse"><i class="fa fa-minus"></i></button>
                                                         </div>
                                                     </div>
+                                                    <div class="box-body">
 
-                                                    <div class="row">
-                                                        <div class="col-xs-8 col-xs-offset-2">
-                                                            <div class="multi_tags_content">
-                                                                <ul class="tags_list" id="domaine">
-                                                                    <!-- hier come the tags of tools -->
-
-                                                                </ul>
-
+                                                        <div class="row">
+                                                            <div class="col-xs-6 col-xs-offset-3">
+                                                                <div class="form-group">
+                                                                    <select class="form-control tagschocestools">
+                                                                        <option value="0"></option>
+                                                                        {% for tool in tools %}
+                                                                            <option  value="{{ tool.id }}">{{ tool.liblle | trans }}</option>
+                                                                        {% endfor %}
+                                                                    </select>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
 
+                                                        <div class="row">
+                                                            <div class="col-xs-8 col-xs-offset-2">
+                                                                <div class="multi_tags_content">
+                                                                    <ul class="tags_list" id="tools">
+                                                                        <!-- hier come the tags of tools -->
+
+                                                                        {% for userTool in userTools %}
+                                                                            <li class="alert multi_tags">
+                                                                                <input type="hidden" class="tools" value="{{ userTool.id }}" name="tools[]" >
+                                                                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                                                                <h5>{{ userTool.liblle }}</h5>
+                                                                            </li>
+                                                                        {% endfor %}
+
+                                                                    </ul>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
 
-
-                                <div class="row">
-                                    <div class="boxautres">
-                                        <div class="col-xs-12">
-                                            <div class="box box-info">
-                                                <div class="box-header with-border">
-                                                    <h3 class="box-title">{{ 'Tools' | trans}}</h3>
-                                                    <div class="box-tools pull-right">
-                                                        <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse"><i class="fa fa-minus"></i></button>
-                                                    </div>
-                                                </div>
-                                                <div class="box-body">
-
-                                                    <div class="row">
-                                                        <div class="col-xs-6 col-xs-offset-3">
-                                                            <div class="form-group">
-                                                                <select class="form-control tagschocestools">
-                                                                    <option value="0"></option>
-                                                                    {% for tool in tools %}
-                                                                        <option  value="{{ tool.id }}">{{ tool.liblle | trans }}</option>
-                                                                    {% endfor %}
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="row">
-                                                         <div class="col-xs-8 col-xs-offset-2">
-                                                             <div class="multi_tags_content">
-                                                                 <ul class="tags_list" id="tools">
-                                                                     <!-- hier come the tags of tools -->
-
-                                                                 </ul>
-
-                                                             </div>
-                                                         </div>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <div class="box-footer">
+                                        <button type="submit" class="btn btn-primary">{{ 'Enregister' | trans }}</button>
                                     </div>
-                                </div>
 
-                                <div class="box-footer">
-                                    <button type="submit" class="btn btn-primary">{{ 'Enregister' | trans }}</button>
-                                </div>
+                                </form>
                             </div><!-- /.tab-pane -->
                         </div><!-- /.tab-content -->
                     </div><!-- nav-tabs-custom -->
@@ -519,6 +685,7 @@
 
                     e.preventDefault();
                     var sourceElem = $(this);
+                    $('#progress').css("display","block");
                     $.ajax({
                         type: $(this).attr('method'),
                         url: $(this).attr('action'),
@@ -533,26 +700,26 @@
                                     var html='<input type="hidden" name="idExperience" value="'+data["idExperience"]+'">';
                                     sourceElem.prepend(html);
                                 }
-                                showMessage(data["message"]);
+                                showMessage(data["message"],"success");
 
                         },
 
                         error: function (resultat, statut, erreur) {
-                            showMessage(erreur);
+                                showMessage(erreur,"danger");
                         },
 
                         complete: function (resultat, statut) {
-
+                            $('#progress').css("display","none");
                         }
                     });
 
                 });
             }
 
-            /**  show returened actions messages */
-            function showMessage(message){
+            /**  show returened actions messages,  type=danger|info*/
+            function showMessage(message,type){
 
-                var html='<div class="alert alert-info alert-dismissable ">'+
+                var html='<div class="alert alert-'+type+' alert-dismissable ">'+
                          '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>'+message+'</div>';
 
                 $('#message').html(null);
@@ -616,14 +783,28 @@
                 });
             }
 
+            /** type= tools||langue||domaine */
             function addliAllTypes(type,source){
                 var html='<li class="alert multi_tags">'+
-                        '<input type="hidden" value="'+$(source).find(":selected").val()+'" name="'+type+'[]" >'+
+                        '<input type="hidden" class="'+type+'" value="'+$(source).find(":selected").val()+'" name="'+type+'[]" >'+
                         '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>'+
                         '<h5>'+$(source).find(":selected").text()+'</h5>'+
                         '</li>';
 
-                $('#'+type).append(html);
+                bool=true;
+                $('.'+type).each(function(i,val){
+                    if($(this).attr('value')==$(source).find(":selected").val()){
+                        bool=false;
+                        return false;
+                    }
+
+                });
+
+                if(bool){
+                    $('#'+type).append(html);
+                }else{
+                    showMessage("{{ 'Cet Element est deja choisi!.'| trans }}","danger");
+                }
             }
 
             /*** add tags  ****/

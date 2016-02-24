@@ -35,6 +35,7 @@ class ProfilModel
     //get all cities
     public function listCities(){
         $query = $this->em->createQuery("SELECT v FROM UserBundle\Entity\Ville v");
+        $query->setMaxResults(20);
         return $query->getResult();
     }
 
@@ -97,6 +98,15 @@ class ProfilModel
         }
     }
 
+    //list de diplomes d un user
+    function listDiplomes($user){
+        if($user!=null){
+            return $user->getDiplomes();
+        }else{
+            return null;
+        }
+    }
+
 
     //add diplome
     function addExperience(Experience $experience){
@@ -126,4 +136,138 @@ class ProfilModel
             $this->em->flush();
         }
     }
+
+    //list de experiences d un user
+    function listExperiences($user){
+        if($user!=null){
+            return $user->getExperiences();
+        }else{
+            return null;
+        }
+    }
+
+
+    //get langue
+    function getLangue($id){
+        $langue = $this->em->find("UserBundle\Entity\Langue", $id);
+        return $langue ;
+    }
+
+    //get Domaine
+    function getDomaine($id){
+        $domaine = $this->em->find("UserBundle\Entity\Domaine", $id);
+        return $domaine ;
+    }
+
+    //get Tools
+    function getTools($id){
+        $tools = $this->em->find("UserBundle\Entity\Tools", $id);
+        return $tools ;
+    }
+
+
+    //add langues
+    function addLangues($user, $langues){
+
+        if($langues!=null){
+            //remove the old langues
+            $tousLangues=$this->listLangages();
+            foreach($tousLangues as $langue){
+                if($langue!=null && $user!=null){
+                    $user->removeLangue($langue);
+                    $langue->removeUser($user);
+                    $this->em->flush();
+                }
+            }
+
+            //add the new langues
+            foreach($langues as $idLangue){
+                $langue=$this->getLangue($idLangue);
+                if($langue!=null && $user!=null){
+                    $user->addLangue($langue);
+                    $langue->addUser($user);
+                    $this->em->flush();
+                }
+            }
+        }
+    }
+
+    //list des Langues d 'un user
+    function listUserLangues($user){
+        if($user!=null){
+            return $user->getLangues();
+        }else{
+            return null;
+        }
+    }
+
+    //add Tools
+    function addTools($user, $tools){
+        if($tools!=null){
+            //remove the old tools
+            $tousTools=$this->listTools();
+            foreach($tousTools as $tool){
+                if($tool!=null && $user!=null){
+                    $user->removeTool($tool);
+                    $tool->removeUser($user);
+                    $this->em->flush();
+                }
+            }
+
+            //add the new tools
+            foreach($tools as $idTool){
+                $tool=$this->getTools($idTool);
+                if($tool!=null && $user!=null){
+                    $user->addTool($tool);
+                    $tool->addUser($user);
+                    $this->em->flush();
+                }
+            }
+        }
+    }
+
+    //list des tools d 'un user
+    function listUserTools($user){
+        if($user!=null){
+            return $user->getTools();
+        }else{
+            return null;
+        }
+    }
+
+
+    //add domaines
+    function addDomaines($user, $domaines){
+        if($domaines!=null){
+            //remove the old tools
+            $tousDomaines=$this->listDomaines();
+            foreach($tousDomaines as $domaine){
+                if($domaine!=null && $user!=null){
+                    $user->removeDomaine($domaine);
+                    $domaine->removeUser($user);
+                    $this->em->flush();
+                }
+            }
+
+            //add the new tools
+            foreach($domaines as $idDomaines){
+                $domaine=$this->getDomaine($idDomaines);
+                if($domaine!=null && $user!=null){
+                    $user->addDomaine($domaine);
+                    $domaine->addUser($user);
+                    $this->em->flush();
+                }
+            }
+        }
+    }
+
+    //list des domaines d 'un user
+    function listUserDomaines($user){
+        if($user!=null){
+            return $user->getDomaines();
+        }else{
+            return null;
+        }
+    }
+
 }

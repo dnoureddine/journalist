@@ -23,7 +23,7 @@ class ProfilController extends Controller
 {
 
     /**
-     * @Route("/{_locale}/profile/", name="profile")
+     * @Route("/{_locale}/admin/profile/", name="profile")
      */
     public function profilAction()
     {
@@ -33,13 +33,21 @@ class ProfilController extends Controller
         $domaines=$model->listDomaines();
         $langues = $model->listLangages();
         $tools = $model->listTools();
+        $user=$this->getUser();
+        $diplomes = $model->listDiplomes($user);
+        $experiences = $model->listExperiences($user);
+        $userLangues=$model->listUserLangues($user);
+        $userTools=$model->listUserTools($user);
+        $userDomaines=$model->listUserDomaines($user);
 
         return $this->render('AdminBundle:Profil:profil_2.html.twig',array("villes"=>$villes,
-            "payss"=>$payss, "domaines"=>$domaines, "langues"=>$langues, "tools"=>$tools));
+            "payss"=>$payss, "domaines"=>$domaines, "langues"=>$langues,"user"=>$user, "tools"=>$tools,
+            "diplomes"=>$diplomes, "experiences"=>$experiences, "userLangues"=>$userLangues,
+            "userTools"=>$userTools, "userDomaines"=>$userDomaines));
     }
 
     /**
-     * @Route("/{_locale}/informations/", name="informations")
+     * @Route("/{_locale}/admin/informations/", name="informations")
      */
     public function informationsAction(Request $req)
     {
@@ -56,7 +64,7 @@ class ProfilController extends Controller
         /** if valide make change */
         if($isValid){
              $model = new UserModel($this->getDoctrine()->getEntityManager());
-             $user=$model->getUser(1);
+             $user=$this->getUser();
             if($user!=null){
                 $user->setTitre($titre);
                 $user->setNom($nom);
@@ -85,7 +93,7 @@ class ProfilController extends Controller
     }
 
     /**
-     * @Route("/{_locale}/contact/", name="contact")
+     * @Route("/{_locale}/admin/contact/", name="contact")
      */
     public function contactAction(Request $req)
     {
@@ -108,7 +116,7 @@ class ProfilController extends Controller
         /** if valide make change */
         if($isValid){
             $model = new UserModel($this->getDoctrine()->getEntityManager());
-            $user=$model->getUser(1);
+            $user=$this->getUser();
             if($user!=null){
 
                 $user->setEmail($email);
@@ -143,7 +151,7 @@ class ProfilController extends Controller
     }
 
     /**
-     * @Route("/{_locale}/diplomes/", name="diplomes")
+     * @Route("/{_locale}/admin/diplomes/", name="diplomes")
      */
     public function diplomesAction(Request $req)
     {
@@ -166,7 +174,7 @@ class ProfilController extends Controller
         /** if valide make change */
         if($isValid){
             $model = new UserModel($this->getDoctrine()->getEntityManager());
-            $user=$model->getUser(1);
+            $user=$this->getUser();
             if($user!=null){
                 /***** we test if the id of diplome is not null, if it's than we create a new diplome */
                 if($idDiplome!=null){
@@ -224,7 +232,7 @@ class ProfilController extends Controller
 
 
     /**
-     * @Route("/{_locale}/experiences/", name="experiences")
+     * @Route("/{_locale}/admin/experiences/", name="experiences")
      */
     public function experiencesAction(Request $req)
     {
@@ -247,7 +255,7 @@ class ProfilController extends Controller
         /** if valide make change */
         if($isValid){
             $model = new UserModel($this->getDoctrine()->getEntityManager());
-            $user=$model->getUser(1);
+            $user=$this->getUser();
             if($user!=null){
                 /***** we test if the id of Experience is not null, if it's than we create a new Experience */
                 if($idExperience!=null){
@@ -305,7 +313,47 @@ class ProfilController extends Controller
 
 
     /**
-     * @Route("/{_locale}/test/", name="test")
+     * @Route("/{_locale}/admin/autres/", name="autres")
+     */
+    public function autresAction(Request $req)
+    {
+        $action="";
+        $message="";
+        $isValid=true;
+        $modelProfil = new ProfilModel($this->getDoctrine()->getEntityManager());
+        $model = new UserModel($this->getDoctrine()->getEntityManager());
+        $user=$this->getUser();
+
+        /** recuperer les paremetres */
+        $langues=$req->get("langue");
+        $domaines=$req->get("domaine");
+        $tools=$req->get("tools");
+
+        /**** parametres validation  */
+
+
+        if($isValid) {
+            /*** add Langues  */
+            $modelProfil->addLangues($user, $langues);
+
+            /** add tools */
+            $modelProfil->addTools($user, $tools);
+
+            /** add Domaines */
+            $modelProfil->addDomaines($user,$domaines);
+
+            $message="Your Changes have been successfuly done.";
+        }
+
+
+
+        $output = array("message"=>$message, "action"=>$action, "form"=>"autres");
+        return new Response(json_encode($output), 200, ['Content-Type' => 'application/json']);
+    }
+
+
+    /**
+     * @Route("/{_locale}/admin/test/", name="test")
      */
     public function testAction(Request $req)
     {

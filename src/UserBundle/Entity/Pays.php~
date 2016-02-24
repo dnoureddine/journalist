@@ -30,6 +30,18 @@ class Pays
     private $name;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="sortname", type="string", length=255)
+     */
+    private $sortname;
+
+    /**
+     * @ORM\OneToMany(targetEntity="State", mappedBy="pays", cascade={"persist","remove"})
+     */
+    protected $states;
+
+    /**
      *  @var ArrayCollection $users
      * @ORM\OneToMany(targetEntity="User", mappedBy="pays", cascade={"persist", "remove", "merge"})
      */
@@ -40,6 +52,7 @@ class Pays
         parent::__construct();
         // your own logic
         $this->users= new ArrayCollection();
+        $this->states=new ArrayCollection();
     }
 
 
@@ -110,4 +123,6 @@ class Pays
     {
         return $this->users;
     }
+
+
 }

@@ -90,7 +90,7 @@ class User extends BaseUser
     /**
      * @var boolean
      *
-     * @ORM\Column(name="status", type="boolean")
+     * @ORM\Column(name="status", type="boolean", nullable=true)
      */
     private $status;
 
@@ -553,5 +553,29 @@ class User extends BaseUser
     public function getPays()
     {
         return $this->pays;
+    }
+
+    /**
+     * Set titre
+     *
+     * @param string $titre
+     *
+     * @return User
+     */
+    public function setTitre($titre)
+    {
+        $this->titre = $titre;
+
+        return $this;
+    }
+
+    /**
+     * Get titre
+     *
+     * @return string
+     */
+    public function getTitre()
+    {
+        return $this->titre;
     }
 }
